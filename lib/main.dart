@@ -24,48 +24,42 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //widgetRefを通してRiver pod内のproviderとアクセスできる
 
     return Scaffold(
       appBar: AppBar(
-        title: Consumer(
-            builder: (context, ref, child) => Text(ref.watch(tittleProvider))),
+        title: Text(ref.watch(tittleProvider)),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) =>
-                  Text(
-                ref.watch(text1Provider),
-              ),
+            Text(
+              ref.watch(text1Provider),
             ),
-            Consumer(
-              builder: (context, ref, child) =>
-                  //BuildContext context, WidgetRef ref, Widget? child は一度書いたら上記のように省略可能
-                  Text(
-                ref.watch(countProvider).toString(),
-                style: Theme.of(context).textTheme.headline4,
-              ),
+            Text(
+              ref.watch(countProvider).toString(),
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
-      floatingActionButton: Consumer(builder: (context, ref, child) {
-        print('rebuild button');
-        return FloatingActionButton(
-          onPressed: () => ref.read(countProvider.state).state++,
-          //watchからread に変更することで余計なボタンの読み込みをなくし、ボタン後の数だけを読み込んでいる
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        );
-      }), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref.read(countProvider.state).state++,
+        //watchからread に変更することで余計なボタンの読み込みをなくし、ボタン後の数だけを読み込んでいる
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
