@@ -51,6 +51,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               ref.watch(countProvider).toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text("test")
           ],
         ),
       ),
