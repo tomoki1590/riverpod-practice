@@ -47,11 +47,11 @@ void main() {
     target.decrease();
     expect(target.countData.count, 1);
     expect(target.countData.countUp, 2);
-    expect(target.countData.countDown, 30);
+    expect(target.countData.countDown, 1);
 
     target.reset();
     expect(target.countData.count, 0);
     expect(target.countData.countUp, 0);
-    expect(target.countData.countDown, 1);
+    expect(target.countData.countDown, 0);
   });
 }
