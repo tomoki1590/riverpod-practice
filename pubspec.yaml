@@ -38,6 +38,7 @@ dependencies:
   freezed: ^1.1.0
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
+  golden_toolkit: ^0.9.0
 
 dev_dependencies:
   flutter_test:

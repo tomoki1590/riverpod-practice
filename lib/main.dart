@@ -21,24 +21,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(VieModel()),
     );
   }
 }
 
 class MyHomePage extends ConsumerStatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  VieModel vieModel;
+  MyHomePage(this.vieModel, {Key? key}) : super(key: key);
 
   @override
   ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-  final VieModel _vieModel = VieModel();
+  late VieModel _vieModel;
 
   @override
   void initState() {
     super.initState();
+    _vieModel = widget.vieModel;
     _vieModel.setRef(ref);
   }
 
